@@ -1,0 +1,39 @@
+<h1><%= @project.title %></h1>
+<p>
+  <%= @project.description %>
+</p>
+<%= link_to "Edit", edit_project_path(@project) %>
+<%= link_to "Delete", project_path(@project),
+                      method: :delete,
+                      data: {confirm: "Are you sure?"} %>
+                      
+<% if @favourite.present? && @favourite.persisted? %>
+
+  <%= link_to "Un-Favourite", project_favourite_path(@project, @favourite), method: :delete %>
+
+<% else %>
+  <%= link_to "Favourite", project_favourites_path(@project), method: :post %>
+
+<% end %>
+
+<hr>
+
+<h2>Create a Comment</h2>
+
+<%#= form_for @answer, url: question_answers_path(@question) do |f| %>
+<%= @discussion.errors.full_messages.join(", ") %>
+<%= form_for [@project, @discussion] do |f| %>
+  <div>
+    <%= f.text_area :description %>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<h2>Discussion</h2>
+<% @project.discussions.each do |dis| %>
+  <%= dis.description %>
+  <%= link_to "delete", project_discussion_path(@project, dis),
+                        method: :delete,
+                        data: {confirm: "Are you sure?"} %>
+  <hr>
+<% end %>

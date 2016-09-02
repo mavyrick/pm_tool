@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>PM Tool</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <!-- <%= link_to "Home", root_path %>
+
+    <%= link_to "About", about_path %>
+
+    <%= link_to "Projects", projects_path %>
+
+    <%= link_to "New Project", projects_new_path %>
+
+    <%= link_to "Favourite Projects", projects_favourites_path %>
+
+    <%= link_to "Tasks", tasks_path %>
+
+    <%= link_to "New Task", new_task_path %>
+
+    <%= link_to "Search", projects_search_path %> -->
+
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <ul class="nav navbar-nav">
+        <li><%= link_to "Home", root_path %></li>
+        <li><%= link_to "About", about_path %></li>
+        <li><%= link_to "Projects", projects_path %></li>
+        <li><%= link_to "New Project", projects_new_path %></li>
+        <li><%= link_to "Favourite Projects", projects_favourites_path %></li>
+        <li><%= link_to "Tasks", tasks_path %></li>
+        <li><%= link_to "New Task", new_task_path %></li>
+        <li><%= link_to "Search", projects_search_path %></li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right" id="nav-right"></li>
+        <li><% if user_signed_in? %> Welcome <%= current_user.first_name %></li>
+          <li><%= link_to "Logout", sessions_path, method: :delete,
+                   data: {confirm: "are you sure you want to log out?"}%></li>
+        <% else %>
+         <li><%= link_to "Login", new_project_path %></li>|
+          <li><%= link_to "Sign Up", new_user_path %></li>
+        <% end %>
+      </ul>
+    </nav>
+
+    <%= flash[:notice] || flash[:alert] %>
+
+    <%= yield %>
+  </body>
+</html>

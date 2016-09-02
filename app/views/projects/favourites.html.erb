@@ -1,0 +1,6 @@
+<h1>Favourite Projects</h1>
+
+<% @user.favourited_projects.each do |favourite| %>
+  <%= link_to favourite.title, project_path(favourite) %>
+  <hr>
+<% end %>
