@@ -5,10 +5,15 @@ class CommentsController < ApplicationController
       comment_params = params.require(:comment).permit(:body)
       @comment   = Comment.new comment_params
       @comment.discussion = @discussion
+      respond_to do |format|
       if @comment.save
-        redirect_to discussion_path(discussion), notice: "Comment created!"
+        format.html { redirect_to discussion_path(@discussion), notice: "Answer created successfully!" }
+      format.js { render :create_success }
+        # redirect_to discussion_path(discussion), notice: "Comment created!"
       else
-        render "/discussions/show"
+        format.html { render "questions/show" }
+      format.js   { render :create_failure }
+        # render "/discussions/show"
       end
     end
 

@@ -1,3 +1,5 @@
+require "attachment_uploader"
+
 class Project < ApplicationRecord
 
   validates :title, presence: true
@@ -12,8 +14,14 @@ class Project < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :members, through: :memberships, source: :user
 
+  mount_uploader :attachment, AttachmentUploader
+
   def favourite_for(user)
     favourites.find_by_user_id(user)
   end
+
+  def membership_for(user)
+   memberships.find_by_user_id(user)
+ end
 
 end

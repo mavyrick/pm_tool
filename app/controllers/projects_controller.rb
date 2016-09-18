@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def create
-    project_params = params.require(:project).permit([:title, :description])
+    project_params = params.require(:project).permit(:title, :description, :attachment)
     @project = Project.create project_params
 
     if @project.save
@@ -38,12 +38,13 @@ class ProjectsController < ApplicationController
     @discussion = Discussion.new
     @favourite = @project.favourite_for(current_user)
     @membership = @project.membership_for(current_user)
+    # @memberships = User.where()
     # @comment = Comment.new
   end
 
   def update
     @project = Project.find params[:id]
-    @project.update params.require(:project).permit([:title, :description])
+    @project.update params.require(:project).permit([:title, :description, :attachment])
     flash[:notice] = "Project editted successfully"
     redirect_to project_path(@project)
   end

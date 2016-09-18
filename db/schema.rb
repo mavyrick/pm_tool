@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160902022805) do
+ActiveRecord::Schema.define(version: 20160916020350) do
 
   create_table "comments", force: :cascade do |t|
     t.text     "body"
@@ -61,6 +61,9 @@ ActiveRecord::Schema.define(version: 20160902022805) do
     t.date     "due_date"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
+    t.string   "attachment"
+    t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
   create_table "tasks", force: :cascade do |t|
@@ -77,6 +80,8 @@ ActiveRecord::Schema.define(version: 20160902022805) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_users_on_project_id"
   end
 
 end

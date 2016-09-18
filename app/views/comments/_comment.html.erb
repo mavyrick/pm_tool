@@ -1,0 +1,4 @@
+<%= comment.body %>
+<%= link_to "Delete", project_comment_path(@project, comment),
+                      method: :delete,
+                      data: {confirm: "Are you sure?"} %>

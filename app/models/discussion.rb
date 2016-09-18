@@ -1,4 +1,4 @@
 class Discussion < ApplicationRecord
   belongs_to :project
-  has_many :comments, dependent: :destroy
+  has_many :discussions, dependent: :destroy
 end

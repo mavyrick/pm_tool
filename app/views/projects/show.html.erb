@@ -1,12 +1,17 @@
 <h1><%= @project.title %></h1>
-<p>
+<div>
   <%= @project.description %>
-</p>
+</div>
+<% if @project.attachment.blank? == false %>
+<div>
+  <%= image_tag @project.attachment.thumb.url %>
+</div>
+<% end %>
 <%= link_to "Edit", edit_project_path(@project) %>
 <%= link_to "Delete", project_path(@project),
                       method: :delete,
                       data: {confirm: "Are you sure?"} %>
-                      
+
 <% if @favourite.present? && @favourite.persisted? %>
 
   <%= link_to "Un-Favourite", project_favourite_path(@project, @favourite), method: :delete %>
@@ -15,6 +20,23 @@
   <%= link_to "Favourite", project_favourites_path(@project), method: :post %>
 
 <% end %>
+<% if @membership.present? && @membership.persisted? %>
+  <%= link_to "Un-Member", project_membership_path(@project, @membership), method: :delete %>
+<% else %>
+  <%= link_to "Become a Member", project_memberships_path(@project), method: :post %>
+<% end %>
+
+<hr>
+
+<h2>Members</h2>
+
+<% @project.members.each do |member| %>
+    <p><%= member.full_name %></p>
+<% end %>
+
+<%# @memberships.each do |member| %>
+  <%# member.projects.full_name %>
+<%# end %>
 
 <hr>
 

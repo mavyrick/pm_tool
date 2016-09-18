@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :favourited_projects, through: :favourites, source: :project
 
   has_many :memberships, dependent: :destroy
-  has_many :projects, through: :memberships
+  has_many :member_projects, through: :memberships, source: :project
 
   def full_name
     "#{first_name} #{last_name}"

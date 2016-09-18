@@ -36,6 +36,8 @@ gem 'font-awesome-sass'
 gem 'font-awesome-rails'
 
 gem 'kaminari'
+gem 'carrierwave'
+gem 'mini_magick'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -50,6 +52,8 @@ group :development, :test do
   gem "hirb"
   gem "faker", github: "stympy/faker"
   gem 'rspec-rails'
+  gem 'pry'
+  gem 'pry-rails'
 end
 
 group :development do
